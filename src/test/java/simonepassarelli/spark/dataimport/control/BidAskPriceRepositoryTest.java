@@ -74,7 +74,7 @@ class BidAskPriceRepositoryTest {
     }
 
     @Test
-    void invalidLeftOperand() {
+    void invalidLeftIdentifier() {
         var exception = Assertions.assertThrows(InvalidQueryException.class, () -> BidAskPriceRepository.filter("suorce=citi"));
         Assertions.assertEquals("Invalid query specified: suorce=citi", exception.getMessage());
     }

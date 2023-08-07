@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public enum Operator {
-    LESS {
+    LESS_THAN {
         @Override
         public boolean compareTimestamp(LocalDateTime timestamp, int ageInMs) {
             var now = LocalDateTime.now();
@@ -68,7 +68,7 @@ public enum Operator {
 
     public static Operator fromString(String operator) {
         return switch (operator) {
-            case "<" -> LESS;
+            case "<" -> LESS_THAN;
             case "<=" -> LESS_OR_EQUAL;
             case "=" -> EQUAL;
             case ">=" -> HIGHER_OR_EQUAL;

@@ -28,8 +28,7 @@ public class BidAskPrice {
     /**
      * Needed by OpenCSV to instantiate the object
      */
-    public BidAskPrice() {
-    }
+    public BidAskPrice() {}
 
     public BidAskPrice(String source, String symbol, LocalDateTime timestamp, double bidPrice, double askPrice) {
         this.source = source;

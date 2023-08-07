@@ -3,6 +3,7 @@ package simonepassarelli.spark.filter;
 import simonepassarelli.spark.dataimport.entity.BidAskPrice;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -13,11 +14,11 @@ public sealed interface Filter permits AgeFilter, AskPriceFilter, BidPriceFilter
 
     Comparator<BidAskPrice> comparator();
 
-    static Filter toQueryFilter(String queryString) {
-        var filters = queryString.lines()
-                                 .map(Filter::removeAllWhiteSpaces)
-                                 .map(Filter::parseSingleLine)
-                                 .toList();
+    static Filter createQueryFilter(String queryString) {
+        List<Filter> filters = queryString.lines()
+                                          .map(Filter::removeAllWhiteSpaces)
+                                          .map(Filter::parseSingleLine)
+                                          .toList();
         return new CompoundFilter(filters);
     }
 
@@ -59,7 +60,6 @@ public sealed interface Filter permits AgeFilter, AskPriceFilter, BidPriceFilter
                         .mapToObj(Filter::charToString)
                         .takeWhile(allowedValues::contains)
                         .collect(Collectors.joining());
-
     }
 
     private static String charToString(int i) {

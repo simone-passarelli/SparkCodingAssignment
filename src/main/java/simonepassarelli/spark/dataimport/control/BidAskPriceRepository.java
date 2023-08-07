@@ -7,10 +7,12 @@ import simonepassarelli.spark.filter.Filter;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * Repository to store in-memory all BidAskPrice objects.
+ */
 public final class BidAskPriceRepository {
 
-    private BidAskPriceRepository() {
-    }
+    private BidAskPriceRepository() {}
 
     private static final HashSet<BidAskPrice> prices = new HashSet<>();
 
@@ -23,7 +25,7 @@ public final class BidAskPriceRepository {
     }
 
     public static QueryResult filter(String query) {
-        Filter filter = Filter.toQueryFilter(query);
+        Filter filter = Filter.createQueryFilter(query);
         var result = prices.stream()
                            .filter(filter.predicate())
                            .sorted(filter.comparator())
